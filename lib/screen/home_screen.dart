@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crud/services/personagem_service.dart';
 import 'package:flutter/material.dart';
+import 'missoes_screen.dart';
 
 import '../models/personagem.dart';
 import '../services/auth_service.dart';
@@ -87,12 +88,42 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         child: SafeArea(
           child: Column(
-            children: [
-              _cabecalho(),
-              _formulario(),
-              _tituloSecao('⚔  LISTA DE HERÓIS  ⚔'),
-              Expanded(child: _listaHerois()),
-            ],
+            
+children: [
+  _cabecalho(),
+  _formulario(),
+
+  // Botão para acessar as missões
+  Padding(
+    padding: const EdgeInsets.symmetric(
+      horizontal: 14,
+      vertical: 8,
+    ),
+    child: SizedBox(
+      width: double.infinity,
+      child: OutlinedButton.icon(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const MissoesScreen(),
+            ),
+          );
+        },
+        icon: const Icon(Icons.emoji_events),
+        label: const Text('MISSÕES CONCLUÍDAS'),
+        style: OutlinedButton.styleFrom(
+          foregroundColor: _ouro,
+          side: const BorderSide(color: _ouro),
+        ),
+      ),
+    ),
+  ),
+
+  _tituloSecao('⚔  LISTA DE HERÓIS  ⚔'),
+  Expanded(child: _listaHerois()),
+],
+
           ),
         ),
       ),
